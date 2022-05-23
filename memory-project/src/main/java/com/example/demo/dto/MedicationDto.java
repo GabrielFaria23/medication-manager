@@ -4,28 +4,20 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "medication")
 public class MedicationDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "anvisa_registration_number")
     private String anvisaRegistrationNumber;
 
     private String name;
 
-    @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
-    @Column(name = "telephone_sac")
     private String telephoneSac;
 
     private Double price;
 
-    @Column(name = "quantity_pills")
     private Integer quantityPills;
 
     private ManufacturerDto manufacturer;
@@ -33,8 +25,7 @@ public class MedicationDto {
     private List<AdverseReactionsDto>  adverseReactions;
 
     public MedicationDto(Integer id, String anvisaRegistrationNumber, String name, LocalDateTime expirationDate,
-                         String telephoneSac, Double price, Integer quantityPills, ManufacturerDto manufacturer,
-                         List<AdverseReactionsDto> adverseReactions) {
+                         String telephoneSac, Double price, Integer quantityPills) {
         this.id = id;
         this.anvisaRegistrationNumber = anvisaRegistrationNumber;
         this.name = name;
@@ -42,8 +33,6 @@ public class MedicationDto {
         this.telephoneSac = telephoneSac;
         this.price = price;
         this.quantityPills = quantityPills;
-        this.manufacturer = manufacturer;
-        this.adverseReactions = adverseReactions;
     }
 
     public Integer getId() {

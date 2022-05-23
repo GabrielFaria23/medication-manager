@@ -2,12 +2,8 @@ package com.example.demo.dto;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "adverse_reactions")
 public class AdverseReactionsDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String description;

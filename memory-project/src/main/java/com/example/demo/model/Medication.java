@@ -3,13 +3,15 @@ package com.example.demo.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "medication")
+@SequenceGenerator(name = "sq_medication", sequenceName = "sq_medication", allocationSize = 1)
 public class Medication extends BaseModel{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_medication")
     private Integer id;
 
     @Column(name = "anvisa_registration_number")
@@ -28,13 +30,19 @@ public class Medication extends BaseModel{
     @Column(name = "quantity_pills")
     private Integer quantityPills;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_manufacturer")
     private Manufacturer manufacturer;
 
-    private List<AdverseReactions>  adverseReactions;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "medication_adverse_reactions",
+            joinColumns = @JoinColumn(name = "id_medication"),
+            inverseJoinColumns = @JoinColumn(name = "id_adverse_reactions")
+    )
+    private List<AdverseReactions> adverseReactions ;
 
     public Medication(Integer id, String anvisaRegistrationNumber, String name, LocalDateTime expirationDate,
-                      String telephoneSac, Double price, Integer quantityPills, Manufacturer manufacturer,
-                      List<AdverseReactions> adverseReactions) {
+                      String telephoneSac, Double price, Integer quantityPills) {
         this.id = id;
         this.anvisaRegistrationNumber = anvisaRegistrationNumber;
         this.name = name;
@@ -42,8 +50,6 @@ public class Medication extends BaseModel{
         this.telephoneSac = telephoneSac;
         this.price = price;
         this.quantityPills = quantityPills;
-        this.manufacturer = manufacturer;
-        this.adverseReactions = adverseReactions;
     }
 
     public Integer getId() {
@@ -116,5 +122,18 @@ public class Medication extends BaseModel{
 
     public void setAdverseReactions(List<AdverseReactions> adverseReactions) {
         this.adverseReactions = adverseReactions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Medication that = (Medication) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -2,12 +2,8 @@ package com.example.demo.dto;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "manufacturer")
 public class ManufacturerDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
