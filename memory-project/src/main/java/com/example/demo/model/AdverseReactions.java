@@ -8,11 +8,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "adverse_reactions")
-@SequenceGenerator(name = "sq_adverse_reactions", sequenceName = "sq_adverse_reactions", allocationSize = 1)
 public class AdverseReactions extends BaseModel{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_adverse_reactions")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String description;
@@ -24,6 +23,9 @@ public class AdverseReactions extends BaseModel{
     public AdverseReactions(Integer id, String description) {
         this.id = id;
         this.description = description;
+    }
+
+    public AdverseReactions() {
     }
 
     public Integer getId() {

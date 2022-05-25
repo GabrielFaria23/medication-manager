@@ -12,15 +12,15 @@ CREATE TABLE IF NOT EXISTS medication (
     anvisa_registration_number VARCHAR(17) NOT NULL,
     name VARCHAR(150),
     expiration_date TIMESTAMP DEFAULT NULL,
-    telephone_sac VARCHAR(13),
+    telephone_sac VARCHAR(15),
     price FLOAT,
     quantity_pills INTEGER,
     activated BOOLEAN DEFAULT TRUE,
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT NULL,
     last_update TIMESTAMP DEFAULT NULL,
-    id_manufacturer INTEGER NOT NULL,
-    CONSTRAINT fk_manufacturer FOREIGN KEY (id_manufacturer) REFERENCES manufacturer(id)
+    id_manufacturer SERIAL,
+    FOREIGN KEY (id_manufacturer) REFERENCES manufacturer(id)
 );
 
 CREATE TABLE IF NOT EXISTS adverse_reactions (

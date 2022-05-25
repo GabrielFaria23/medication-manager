@@ -1,36 +1,25 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@MappedSuperclass
-public abstract class BaseModel implements Serializable {
+public class BaseModelDto {
 
     private Boolean activated = true;
 
     private Boolean deleted = false;
 
-    @Column(name = "created_at")
-    @CreationTimestamp
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
-    @Column(name = "last_update")
-    @UpdateTimestamp
-    private LocalDateTime lastUpdate = LocalDateTime.now();
+    private LocalDateTime lastUpdate;
 
-    public BaseModel(Boolean activated, Boolean deleted, LocalDateTime createdAt, LocalDateTime lastUpdate) {
+    public BaseModelDto(Boolean activated, Boolean deleted, LocalDateTime createdAt, LocalDateTime lastUpdate) {
         this.activated = activated;
         this.deleted = deleted;
         this.createdAt = createdAt;
         this.lastUpdate = lastUpdate;
     }
 
-    public BaseModel() {
+    public BaseModelDto() {
     }
 
     public Boolean getActivated() {

@@ -5,17 +5,19 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "manufacturer")
-@SequenceGenerator(name = "sq_manufacturer", sequenceName = "sq_manufacturer", allocationSize = 1)
 public class Manufacturer extends BaseModel{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_manufacturer")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
     public Manufacturer(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Manufacturer() {
     }
 
     public Integer getId() {

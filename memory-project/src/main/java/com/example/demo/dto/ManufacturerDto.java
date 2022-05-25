@@ -1,8 +1,9 @@
 package com.example.demo.dto;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-public class ManufacturerDto {
+@JsonPropertyOrder({"id", "name","activated","deleted","createdAt", "lastUpdate" })
+public class ManufacturerDto extends BaseModelDto{
 
     private Integer id;
     private String name;
@@ -10,6 +11,9 @@ public class ManufacturerDto {
     public ManufacturerDto(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public ManufacturerDto() {
     }
 
     public Integer getId() {

@@ -1,10 +1,14 @@
 package com.example.demo.dto;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
-public class MedicationDto {
+@JsonPropertyOrder({"id", "anvisaRegistrationNumber","name","expirationDate","telephoneSac","price","quantityPills",
+        "manufacturer","adverseReactions","activated","deleted","createdAt", "lastUpdate" })
+public class MedicationDto extends BaseModelDto{
 
     private Integer id;
 
@@ -12,7 +16,7 @@ public class MedicationDto {
 
     private String name;
 
-    private LocalDateTime expirationDate;
+    private Date expirationDate;
 
     private String telephoneSac;
 
@@ -24,7 +28,7 @@ public class MedicationDto {
 
     private List<AdverseReactionsDto>  adverseReactions;
 
-    public MedicationDto(Integer id, String anvisaRegistrationNumber, String name, LocalDateTime expirationDate,
+    public MedicationDto(Integer id, String anvisaRegistrationNumber, String name, Date expirationDate,
                          String telephoneSac, Double price, Integer quantityPills) {
         this.id = id;
         this.anvisaRegistrationNumber = anvisaRegistrationNumber;
@@ -33,6 +37,9 @@ public class MedicationDto {
         this.telephoneSac = telephoneSac;
         this.price = price;
         this.quantityPills = quantityPills;
+    }
+
+    public MedicationDto() {
     }
 
     public Integer getId() {
@@ -59,11 +66,11 @@ public class MedicationDto {
         this.name = name;
     }
 
-    public LocalDateTime getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDateTime expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
