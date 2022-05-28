@@ -51,4 +51,16 @@ public class MedicationController {
     public ResponseEntity<List<MedicationDto>> findAll() throws BusinessException {
         return ResponseEntity.ok(service.findAll());
     }
+
+    @GetMapping("/filter")
+    @ApiOperation(value = "Busca por nome ou número de registro anvisa")
+    public ResponseEntity<List<MedicationDto>> findByAnvisaNumberOrName(@RequestParam() String filter) {
+        return ResponseEntity.ok(service.findByAnvisaNumberOrName(filter));
+    }
+
+    @GetMapping("/check-anvisa-registration-number")
+    @ApiOperation(value = "Verifica se número de registro da anvisa já existe")
+    public ResponseEntity<Boolean> checkAnvisaRegistrationNumber(@RequestParam() String anvisaRegistrationNumber) throws ParseException {
+        return ResponseEntity.ok(service.checkAnvisaRegistrationNumber(anvisaRegistrationNumber));
+    }
 }

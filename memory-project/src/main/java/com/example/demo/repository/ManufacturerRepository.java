@@ -19,6 +19,7 @@ public interface ManufacturerRepository extends JpaRepository<Manufacturer, Inte
 
     @Query(nativeQuery = true, value ="" +
             "SELECT * FROM manufacturer m " +
-            "WHERE m.deleted IS NOT true ")
+            "WHERE m.deleted IS NOT true " +
+            "order by m.id ")
     List<Manufacturer> findAllWhereDeletedIsFalse();
 }

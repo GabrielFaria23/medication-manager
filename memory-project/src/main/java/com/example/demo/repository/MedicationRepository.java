@@ -19,6 +19,23 @@ public interface MedicationRepository extends JpaRepository<Medication, Integer>
 
     @Query(nativeQuery = true, value ="" +
             "SELECT * FROM medication m " +
-            "WHERE m.deleted IS NOT true ")
+            "WHERE m.deleted IS NOT true " +
+            "order by m.id ")
     List<Medication> findAllWhereDeletedIsFalse();
+
+    @Query(nativeQuery = true, value ="" +
+            "SELECT m.anvisa_registration_number FROM medication m " +
+            "WHERE m.deleted IS NOT true " +
+            "AND m.anvisa_registration_number = :anvisaRegistrationNumber ; ")
+    String findByAnvisaNumber(String anvisaRegistrationNumber);
+
+    @Query(nativeQuery = true, value ="" +
+            "SELECT * FROM medication m " +
+            "WHERE m.deleted IS NOT true " +
+            "AND ( " +
+            "   m.name ILIKE concat('%',:filter,'%') " +
+            "   OR m.anvisa_registration_number ILIKE concat('%',:filter,'%') " +
+            ") " +
+            "order by m.id; ")
+    List<Medication> findByAnvisaNumberOrName(String filter);
 }

@@ -19,7 +19,8 @@ public interface AdverseReactionsRepository extends JpaRepository<AdverseReactio
 
     @Query(nativeQuery = true, value ="" +
             "SELECT * FROM adverse_reactions ar " +
-            "WHERE ar.deleted IS NOT true ")
+            "WHERE ar.deleted IS NOT true " +
+            "order by ar.id ")
     List<AdverseReactions> findAllWhereDeletedIsFalse();
 
     @Query(nativeQuery = true, value = "" +

@@ -187,6 +187,20 @@ public class MedicationService {
         }
         medication.setTelephoneSac(utils.formatTelephoneSacNumber(medication.getTelephoneSac()));
 
+        String validateAnvisaNumber = repository.findByAnvisaNumber(medication.getAnvisaRegistrationNumber());
+
+        if (validateAnvisaNumber != null)
+            throw new BusinessException("Número anvisa já cadastrado no sistema!");
+
         return medication;
+    }
+
+    public List<MedicationDto> findByAnvisaNumberOrName(String filter){
+        return repository.findByAnvisaNumberOrName(filter)
+                .stream().map(this::parseToDto).collect(Collectors.toList());
+    }
+
+    public boolean checkAnvisaRegistrationNumber(String anvisaRegistrationNumber) throws ParseException {
+        return repository.findByAnvisaNumber(utils.formatAnvisaNumber(anvisaRegistrationNumber)) == null;
     }
 }
