@@ -170,7 +170,7 @@ public class MedicationService {
     public Medication checkInfoMedication(MedicationDto dto) throws BusinessException {
         if (dto.getManufacturer() == null || dto.getExpirationDate() == null || dto.getAnvisaRegistrationNumber() == null
                 || dto.getPrice() == null || dto.getName() == null || dto.getTelephoneSac() == null){
-            throw new BusinessException("Alguma(s) dado(s) do medicamento não foram informados corretamente!");
+            throw new BusinessException("As informações do medicamento não foram informados corretamente!");
         }
         return parseToEntity(dto);
     }

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AdverseReactionsDto;
+import com.example.demo.dto.MedicationDto;
 import com.example.demo.exception.BusinessException;
 import com.example.demo.service.AdverseReactionsService;
 import io.swagger.annotations.Api;
@@ -49,5 +50,11 @@ public class AdverseReactionsController {
     @ApiOperation(value = "Busca todas as Reação Adversa")
     public ResponseEntity<List<AdverseReactionsDto>> findAll() throws BusinessException {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/filter")
+    @ApiOperation(value = "Busca por descrição")
+    public ResponseEntity<List<AdverseReactionsDto>> findByDescription(@RequestParam() String filter) {
+        return ResponseEntity.ok(service.findByDescription(filter));
     }
 }

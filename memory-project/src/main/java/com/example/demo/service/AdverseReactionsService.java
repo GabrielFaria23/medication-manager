@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.AdverseReactionsDto;
+import com.example.demo.dto.MedicationDto;
 import com.example.demo.exception.BusinessException;
 import com.example.demo.model.AdverseReactions;
 import com.example.demo.repository.AdverseReactionsRepository;
@@ -140,5 +141,10 @@ public class AdverseReactionsService {
 
     public List<AdverseReactionsDto> findAll(){
         return parseListToDto(repository.findAllWhereDeletedIsFalse());
+    }
+
+    public List<AdverseReactionsDto> findByDescription(String filter){
+        return repository.findByDescription(filter)
+                .stream().map(this::parseToDto).collect(Collectors.toList());
     }
 }
