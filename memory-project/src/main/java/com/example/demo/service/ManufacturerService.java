@@ -136,4 +136,9 @@ public class ManufacturerService {
     public List<ManufacturerDto> findAll(){
         return parseListToDto(repository.findAllWhereDeletedIsFalse());
     }
+
+    public List<ManufacturerDto> findByName(String filter){
+        return repository.findByName(filter)
+                .stream().map(this::parseToDto).collect(Collectors.toList());
+    }
 }

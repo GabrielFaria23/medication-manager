@@ -113,8 +113,6 @@ public class AdverseReactionsService {
 
     public void remove(Integer id) throws BusinessException {
 
-        if(repository.checkIfAdverseReactionIsNotViculedToAnyMedication(id) == 0) {
-
             AdverseReactions adverseReaction = repository.findByIdAndDeletedFalse(id)
                     .orElseThrow(() -> new BusinessException("Nenhuma reação adversa encontrada com o id: " + id + "!"));
 
@@ -129,9 +127,6 @@ public class AdverseReactionsService {
                 e.printStackTrace();
                 throw new BusinessException("Erro ao remover reação adversa '"+adverseReaction.getDescription()+"'!");
             }
-        }else {
-            throw new BusinessException("A Reação adversa com id: " + id + " não pode ser removida pois ainda esta vinculada a algum(s) remedio(s)");
-        }
     }
 
     public AdverseReactionsDto findById(Integer id) throws BusinessException {

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AdverseReactionsDto;
 import com.example.demo.dto.ManufacturerDto;
 import com.example.demo.exception.BusinessException;
 import com.example.demo.service.ManufacturerService;
@@ -49,5 +50,11 @@ public class ManufacturerController {
     @ApiOperation(value = "Busca todos os Fabricantes")
     public ResponseEntity<List<ManufacturerDto>> findAll() throws BusinessException {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/filter")
+    @ApiOperation(value = "Busca por descrição")
+    public ResponseEntity<List<ManufacturerDto>> findByName(@RequestParam() String filter) {
+        return ResponseEntity.ok(service.findByName(filter));
     }
 }
